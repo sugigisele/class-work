@@ -1,0 +1,51 @@
+#include <stdio.h>
+
+#define NUM_STUDENTS 5
+
+// Structure to store student data
+typedef struct {
+    char name[50];
+    float subj1, subj2, subj3;
+    float average;
+    char grade;
+} Student;
+
+// Function to calculate grade
+char calculateGrade(float avg) {
+    if (avg >= 90) return 'A';
+    else if (avg >= 80) return 'B';
+    else if (avg >= 70) return 'C';
+    else if (avg >= 60) return 'D';
+    else return 'F';
+}
+
+int main() {
+    Student students[NUM_STUDENTS];
+
+    // Input student details
+    for (int i = 0; i < NUM_STUDENTS; i++) {
+        printf("Enter name of student %d: ", i + 1);
+        scanf(" %[^\n]", students[i].name); // Read full name including spaces
+        printf("Enter marks for three subjects: ");
+        scanf("%f %f %f", &students[i].subj1, &students[i].subj2, &students[i].subj3);
+
+        // Calculate average and grade
+        students[i].average = (students[i].subj1 + students[i].subj2 + students[i].subj3) / 3;
+        students[i].grade = calculateGrade(students[i].average);
+    }
+
+    // Display student details
+    printf("\nStudent Records:\n");
+    printf("------------------------------------------------------\n");
+    printf("Name\t\tSubject1\tSubject2\tSubject3\tAverage\tGrade\n");
+    printf("------------------------------------------------------\n");
+
+    for (int i = 0; i < NUM_STUDENTS; i++) {
+        printf("%s\t%.2f\t\t%.2f\t\t%.2f\t\t%.2f\t%c\n",
+               students[i].name, students[i].subj1, students[i].subj2,
+               students[i].subj3, students[i].average, students[i].grade);
+    }
+
+    return 0;
+}
+
